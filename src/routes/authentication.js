@@ -10,9 +10,15 @@ const authenticationRouter = () => {
   const { login, register } = controller;
 
   router.route('/login')
+  .get((req,res) => {
+    res.json({res: "this is from login url"});
+  })
     .post(login);
 
   router.route('/register')
+  .get((req,res) =>{
+    res.json({res:" register url "});
+  })
     .post(register);
 
   return router;

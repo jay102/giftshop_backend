@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const db = require('./index').sequelize;
 
 
-const Users = db.define('users', {
+const Users = db.define('user', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -11,6 +11,9 @@ const Users = db.define('users', {
     type: Sequelize.INTEGER,
   },
   role: {
+    type: Sequelize.STRING,
+  },
+  name: {
     type: Sequelize.STRING,
   },
   email: {
@@ -31,7 +34,7 @@ const Users = db.define('users', {
   hooks: {
     beforeCreate: (user) => {
       const salt = bcrypt.genSaltSync();
-      let {password} = user;
+      let { password } = user;
       password = bcrypt.hashSync(password, salt);
     },
   },
