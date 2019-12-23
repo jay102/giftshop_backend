@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('./index').sequelize;
 
-const Products = db.define('products', {
+const Products = db.define('products',{}, {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -34,8 +34,9 @@ productPromo: {
     allowNull: false,
     type: Sequelize.DATE,
   },
-})
-freezeTableName = true;
+   freezeTableName : true
+});
+
 Products.sync().then(() => {
   console.log('products table created');
 })
