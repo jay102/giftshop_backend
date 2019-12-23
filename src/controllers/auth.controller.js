@@ -31,7 +31,7 @@ const authController = (User) => {
     User.create({
       role, name, email, password
     }).then((user) => {
-      res.status(200).json({ message: 'User created successfully with name: ' + user.get("name") + ' and email: ' + user.get("email") });
+      res.status(200).json({ message: 'User created successfully with name: ' + user.name + ' and email: ' + user.email });
     }).catch((err) => {
       res.status(400).json({
         error: err,
