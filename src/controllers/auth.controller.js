@@ -6,6 +6,7 @@ const authController = (User) => {
     const { email } = req.body;
     User.findOne({
       where: { email },
+
     }).then((user) => {
       if (!user) {
         return res.status(400).json({
@@ -26,12 +27,22 @@ const authController = (User) => {
   };
 
   const register = (req, res) => {
-
-  };
-
+    const { role, name, password, email } = req.body
+    User.create({
+      role, name, email, password
+    }).then((user) => {
+      res.status(200).json({ message: 'User created successfully with name: ' + user.name + ' and email: ' + user.email });
+    }).catch((err) => {
+      res.status(400).json({
+        error: err,
+      });
+    });
+    console.log("res :", req.body);
+  }
 
   return {
     login, register,
   };
 };
 module.exports = authController;
+
