@@ -34,15 +34,15 @@ const Users = db.define('user', {
   hooks: {
     beforeCreate: (user) => {
       const salt = bcrypt.genSaltSync();
-      let { password } = user;
-      password = bcrypt.hashSync(password, salt);
+      user.password = bcrypt.hashSync(user.password, salt);
+           // console.log(user.password);
     },
   },
 });
 Users.prototype.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
-Users.sync().then(() => {
+Users.sync({ force: true }).then(() => {
   console.log('users table created');
 });
 module.exports = Users;

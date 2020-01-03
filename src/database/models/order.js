@@ -1,32 +1,23 @@
 const Sequelize = require('sequelize');
 const db = require('./index').sequelize;
 
-const Products = db.define('product', {
+const Orders = db.define('order', {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  productName: {
+  orderId: {
     type: Sequelize.STRING,
   },
-  productPrice: {
+  price: {
     type: Sequelize.STRING,
   },
- productImage: {
+ buyer: {
     type: Sequelize.STRING,
   },
-  productDesc: {
-      type: Sequelize.STRING,
-  },
-  productCoupon: {
-    type: Sequelize.STRING,
-},
-productPromo: {
-    type: Sequelize.STRING,
-},
-  createdAt: {
+   createdAt: {
     allowNull: false,
     type: Sequelize.DATE,
   },
@@ -35,7 +26,7 @@ productPromo: {
     type: Sequelize.DATE,
   }
 })
-Products.sync({force:true}).then(() => {
-  console.log('products table created');
+Orders.sync({force:true}).then(() => {
+  console.log('orders table created');
 })
-module.exports = Products;
+module.exports = Orders;

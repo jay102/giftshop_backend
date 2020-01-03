@@ -3,11 +3,11 @@ const productController = (Product) => {
     // user passed in here would be our user model used to access our database
 
     const product = (req, res) => {
-       const { productName, productPrice, productDesc,productImage,productCoupon,productPromo}= req.body;
+       const { productName, productPrice, productDesc, productImage, productCoupon, productPromo}= req.body;
         Product.create({
             productName, productPrice, productDesc,productImage,productCoupon,productPromo
         }).then((pdt) => {
-            res.status(201).json({ message: "Sucessfully created product.. ", pdt });
+            res.status(201).json({ message: "Sucessfully created product.. " });
         }).catch((err) => {
             res.status(400).json({
                 error: err,
@@ -28,7 +28,7 @@ const productController = (Product) => {
             }
             return res.status(200).json({
                 message: 'success',
-                pdt,
+                productName,
             });
         }).catch((err) => res.status(400).json({
             error: err,
