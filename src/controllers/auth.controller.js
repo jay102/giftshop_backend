@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+const salt = bcrypt.genSaltSync();
 
 const authController = (User) => {
   // user passed in here would be our user model used to access our database
@@ -35,7 +37,7 @@ const authController = (User) => {
     User.create({
       role, name, email, password
     }).then((user) => {
-      res.status(200).json({ message: 'User created successfully with name: ' + user.name + ' and email: ' + user.email });
+      res.status(200).json({ message: 'success' });
     }).catch((err) => {
       console.log(err);
       res.status(400).json({
@@ -45,24 +47,27 @@ const authController = (User) => {
     console.log("res :", req.body);
   }
   const forgetPassword = (req, res) => {
-    // 1. check user email exist
-    // 2. if exist update the password field and return a response
+    console.log(req.body);
     const { email } = req.body;
-    const values = { password: req.body.password };
+    const hashed_password = bcrypt.hashSync(req.body.password, salt);
+    const values = { password: hashed_password };
     const selector = { where: { email: req.body.email } }
     console.log(email);
     User.findOne({
       where: { email: req.body.email },
     }).then((user) => {
-      if (!email) {
+      if (!user) {
+        console.log(user)
         return res.status(400).json({
           error: `This email doesn't exist`,
         });
       }
-      user.update(values, selector).then((user) => {
+            User.update(values, selector).then((user) => {
         res.status(200).json({ message: 'Password changed successfully', user })
       }).catch((err) => {
+        console.log(err)
         res.status(400).json({ error: err })
+
       });
 
     })

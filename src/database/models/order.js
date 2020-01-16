@@ -2,14 +2,11 @@ const Sequelize = require('sequelize');
 const db = require('./index').sequelize;
 
 const Orders = db.define('order', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
+ 
   orderId: {
+    allowNull: false,
     type: Sequelize.STRING,
+    primaryKey: true,
   },
   price: {
     type: Sequelize.STRING,

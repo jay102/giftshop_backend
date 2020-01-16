@@ -11,11 +11,17 @@ const Discounts = db.define('discount', {
     couponName: {
     type: Sequelize.STRING,
   },
- couponAmout: {
+ couponAmount: {
     type: Sequelize.STRING,
   },
   active: {
       type : Sequelize.INTEGER
+  },
+  createdAt :{
+    type:Sequelize.DATE
+  },
+  updatedAt :{
+    type:Sequelize.DATE
   }
    
 })

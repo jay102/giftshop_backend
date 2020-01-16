@@ -6,15 +6,18 @@ const router = express.Router();
 
 const discountRouter = () => {
   // destructure controller to pull out functions
-  const {discount} = controller;
+  const {discount,retrieveDiscount,deleteCoupon} = controller;
 
   router.route('/')
   .get((req,res) => {
-    res.json({res: "order url"});
+    res.json({res: "discount url"});
   })
     .post(discount);
 
-  return router;
+    router.route('/coupon/:id')
+      .delete(deleteCoupon)
+      .post(retrieveDiscount)
+   return router;
 };
 
 module.exports = discountRouter;

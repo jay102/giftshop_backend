@@ -37,7 +37,12 @@ const Users = db.define('user', {
       user.password = bcrypt.hashSync(user.password, salt);
            // console.log(user.password);
     },
-  },
+    beforeUpdate: (user) => {
+      const salt = bcrypt.genSaltSync();
+      user.password = bcrypt.hashSync(user.password, salt);
+           // console.log(user.password);
+    },
+      },
 });
 Users.prototype.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);

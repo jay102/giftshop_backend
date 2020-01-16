@@ -8,24 +8,28 @@ const Products = db.define('product', {
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
+
   productName: {
     type: Sequelize.STRING,
   },
   productPrice: {
     type: Sequelize.STRING,
   },
- productImage: {
+  productImage: {
     type: Sequelize.STRING,
   },
   productDesc: {
-      type: Sequelize.STRING,
+    type: Sequelize.STRING,
   },
   productCoupon: {
     type: Sequelize.STRING,
-},
-productPromo: {
+  },
+  productPromo: {
     type: Sequelize.STRING,
-},
+  },
+  categoryName: {
+    type: Sequelize.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: Sequelize.DATE,
@@ -35,7 +39,7 @@ productPromo: {
     type: Sequelize.DATE,
   }
 })
-Products.sync({force:true}).then(() => {
-  console.log('products table created');
-})
+// Products.sync({ force: true }).then(() => {
+//   console.log('products table created');
+// })
 module.exports = Products;
