@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('./index').sequelize;
 const Products = require('./product');
 
-const ProductCategory = db.define('productCategory', {
+const ProductCategory = db.define('category', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -31,18 +31,17 @@ const ProductCategory = db.define('productCategory', {
 }
 )
 
-ProductCategory.hasMany(Products, {
-  sourceKey: "categoryName",
-  foreignKey: "categoryName"
+ProductCategory.hasMany(Products,{
+  sourceKey:'id',
+  foreignKey:'categoryId'
+});
+Products.belongsTo(ProductCategory,{
+  sourceKey:'categoryId',
+  foreignKey:'id'
 })
-Products.belongsTo(ProductCategory,
-  {
-    sourceKey: "categoryName",
-    foreignKey: "categoryName"
-  })
 
 // ProductCategory.sync({force : true}).then(() => {
-//   console.log('product-category table created');
+//   console.log('category table created');
 //  })
 
 module.exports = ProductCategory;

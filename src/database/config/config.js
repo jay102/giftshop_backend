@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     username: 'postgres', // change this to yours
-    password: 'rupa', // and this
+    password: 'activedge', // and this
     database: 'giftshop_backend', // create this database on your postgres
     host: '127.0.0.1',
     dialect: 'postgres',

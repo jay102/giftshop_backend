@@ -25,13 +25,15 @@ const categoryController = (Category,Product) => {
 
     const findCategory=(req,res)=>{
        Category.findAll({where:{categoryName:req.params.categoryName},
-    include: [Product]}).
+        include: [Product]
+    }).
        then(category=>{
            if(!category){
                return res.status(400).json({error:"this category doesn't exist"})
            }
            return res.status(200).json({message:"cateogory found",category})
        }).catch(err=>{
+           console.log(err)
            res.status(400).json({error:err})
        })
 

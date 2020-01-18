@@ -27,8 +27,8 @@ const Products = db.define('product', {
   productPromo: {
     type: Sequelize.STRING,
   },
-  categoryName: {
-    type: Sequelize.STRING,
+  categoryId: {
+    type: Sequelize.INTEGER,
   },
   createdAt: {
     allowNull: false,

@@ -2,7 +2,7 @@
 const productController = (Product) => {
 
     const addProduct = (req, res) => {
-        const { productName, productPrice, productDesc, productCoupon, productPromo, categoryName } = req.body;
+        const { productName, productPrice, productDesc, productCoupon, productPromo, categoryId } = req.body;
         let productImage;
         const { file } = req;
         if (file) {
@@ -11,12 +11,13 @@ const productController = (Product) => {
         }
         console.log(req.body);
         Product.create({
-            productName, productPrice, productDesc, productImage, productCoupon, productPromo, categoryName
+            productName, productPrice, productDesc, productImage, productCoupon, productPromo, categoryId
         }
 
         ).then((pdt) => {
             res.status(201).json({ message: "Sucessfully added product.. ", pdt });
         }).catch((err) => {
+            console.log(err)
             res.status(400).json({
                 error: err,
             });
