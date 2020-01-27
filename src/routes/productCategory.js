@@ -8,14 +8,12 @@ const cloudinary = require('cloudinary');
 const router = express.Router();
 
 const productCategoryRouter = () => {
-    const { addCategory, updateCategory, deleteCategory, findCategory } = controller;
+    const { addCategory, updateCategory, deleteCategory, findCategory, fetchCategory } = controller;
     const { multerInit } = multerSetup;
     router.route('/')
-        .get((req, res) => {
-            res.json({ res: "Category url" })
-        })
+        .get(fetchCategory)
         .post(multerInit.single('image'), addCategory)
-        
+
     router.route('/:categoryName')
         .get(findCategory)
 

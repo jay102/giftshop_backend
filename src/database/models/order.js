@@ -23,7 +23,7 @@ const Orders = db.define('order', {
     type: Sequelize.DATE,
   }
 })
-Orders.sync({force:true}).then(() => {
-  console.log('orders table created');
-})
+//  Orders.sync({force:true}).then(() => {
+//  console.log('orders table created');
+// })
 module.exports = Orders;

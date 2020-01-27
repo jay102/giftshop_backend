@@ -47,7 +47,7 @@ const Users = db.define('user', {
 Users.prototype.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
-Users.sync({ force: true }).then(() => {
-  console.log('users table created');
-});
+// Users.sync({ force: true }).then(() => {
+//   console.log('users table created');
+// });
 module.exports = Users;

@@ -25,7 +25,7 @@ const Discounts = db.define('discount', {
   }
    
 })
-Discounts.sync({force:true}).then(() => {
-  console.log('discounts table created');
-})
+// Discounts.sync({force:true}).then(() => {
+//   console.log('discounts table created');
+// })
 module.exports = Discounts;

@@ -15,7 +15,7 @@ const productController = (Product) => {
         }
 
         ).then((pdt) => {
-            res.status(201).json({ message: "Sucessfully added product.. ", pdt });
+            res.status(201).json({ message: "success", pdt });
         }).catch((err) => {
             console.log(err)
             res.status(400).json({
@@ -24,10 +24,22 @@ const productController = (Product) => {
         });
         console.log(req.body);
     }
-    const productDetail = (req, res) => {
-        const { productName } = req.params;
+    const fetchAllProduct= (req, res) => {
         Product.findAll({
-            where: { productName }
+            attributes: ['productName','productPrice', 'productDesc', 'productImage', 'productCoupon', 'productPromo', 'categoryId']
+        }).
+            then(product => {
+                return res.status(200).json({ message: "fetched successfully", product })
+            }).catch(err => {
+                console.log(err)
+                res.status(400).json({ error: err })
+            })
+    }
+
+    const productDetail = (req, res) => {
+        const { id } = req.params;
+        Product.findAll({
+            where: { id }
         }).then((pdt) => {
             if (!pdt) {
                 return res.status(400).json({
@@ -36,7 +48,7 @@ const productController = (Product) => {
             }
             return res.status(200).json({
                 message: 'success',
-                productName,
+                pdt,
             });
         }).catch((err) => res.status(400).json({
             error: err,
@@ -44,14 +56,20 @@ const productController = (Product) => {
     };
 
     const updateProduct = (req, res) => {
-        const values = {
+        let productImage;
+        const { file } = req;
+        if (file) {
+            productImage = file.url
+        }
 
+        const values = {
             productName: req.body.productName,
             productPrice: req.body.productPrice,
             productDesc: req.body.productDesc,
-            productImage: req.body.productImage,
+            productImage: req.file.productImage,
             productCoupon: req.body.productCoupon,
-            productPromo: req.body.productPromo
+            productPromo: req.body.productPromo,
+            categoryId: req.body.categoryId,
         }
         const selector = { where: { id: req.params.id } }
         Product.update(values, selector).then((pdt) => {
@@ -93,7 +111,8 @@ const productController = (Product) => {
         addProduct,
         productDetail,
         updateProduct,
-        deleteProduct
+        deleteProduct,
+        fetchAllProduct
     };
 };
 module.exports = productController;

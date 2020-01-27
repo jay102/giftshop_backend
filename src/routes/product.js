@@ -8,17 +8,15 @@ const router = express.Router();
 
 const productRouter = () => {
   // destructure controller to pull out functions
-  const { addProduct, productDetail, updateProduct, deleteProduct } = controller;
+  const { addProduct, productDetail, updateProduct, deleteProduct,fetchAllProduct } = controller;
   const { multerInit } = multerSetup;
 
   router.route('/')
-    .get((req, res) => {
-      res.json({ res: "product url" });
-    })
+    .get(fetchAllProduct)
 
     .post(multerInit.single('image'), addProduct)
 
-  router.route('/:productName')
+  router.route('/:id')
     .get(productDetail)
 
   router.route('/updateproduct/:id')
